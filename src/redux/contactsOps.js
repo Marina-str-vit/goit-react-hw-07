@@ -1,41 +1,38 @@
-//https://67b37562392f4aa94fa74786.mockapi.io/tasks
-
 import axios from 'axios';
-
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = 'https://67b37562392f4aa94fa74786.mockapi.io';
+axios.defaults.baseURL = 'https://67bda74b321b883e790d5e71.mockapi.io';
 
-export const fetchData = createAsyncThunk('todos/fetchData', async ({ signal }, thunkAPI) => {
+export const fetchAll = createAsyncThunk('contacts/fetchAll', async (_, thunkAPI) => {
   try {
-    const { data } = await axios.get(`/tasks`, { signal });
+    const { data } = await axios.get(`/contacts`);
     return data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
 });
 
-export const deleteTodo = createAsyncThunk('todos/deleteTodo', async (id, thunkAPI) => {
+export const deleteContact = createAsyncThunk('contacts/deleteContact', async (id, thunkAPI) => {
   try {
-    await axios.delete(`/tasks/${id}`);
-    return id;
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
-  }
-});
-
-export const addTodo = createAsyncThunk('todos/addTodo', async (body, thunkAPI) => {
-  try {
-    const { data } = await axios.post('/tasks', body);
+    const { data } = await axios.delete(`/contacts/${id}`);
     return data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
 });
 
-export const editTodo = createAsyncThunk('todos/editTodo', async (body, thunkAPI) => {
+export const addContact = createAsyncThunk('contacts/addContact', async (body, thunkAPI) => {
   try {
-    const { data } = await axios.put(`/tasks/${body.id}`, body);
+    const { data } = await axios.post('/contacts', body);
+    return data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+export const editContact = createAsyncThunk('contacts/editContact', async (body, thunkAPI) => {
+  try {
+    const { data } = await axios.put(`/contacts/${body.id}`, body);
     return data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
