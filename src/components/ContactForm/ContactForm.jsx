@@ -21,7 +21,7 @@ const ContactForm = () => {
       .max(50, 'Too Long!')
       .matches(onlyLetters, 'Only Letters')
       .trim(),
-    number: Yup.number()
+    number: Yup.string()
       .required('Required')
   });
 
